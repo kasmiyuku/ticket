@@ -35,4 +35,9 @@
 			class="org.springframework.transaction.support.TransactionTemplate"
 			p:transactionManager-ref="transactionTemplate"
 			/>
+			
+	<bean	id="boardDAO"
+			class="com.ticket.dao.impl.BoardDAOImpl"
+			p:sqlSession-ref="sqlSession"
+			/>
 </beans>
