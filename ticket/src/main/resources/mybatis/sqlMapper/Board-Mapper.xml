@@ -4,27 +4,106 @@
 <mapper namespace="BoardMapper">
 	<update id="insertBoard">
 		insert into theater (ttr_no,com_id,ttr_cat,ttr_title,ttr_date,ttr_sdate,ttr_edate,ttr_place,ttr_time,ttr_alert,ttr_content)
-		values(ttr_seq.nextval,#{no},#{id},#{cat},#{title},#{date},#{sdate},#{edate},#{place},#{time},#{alert},#{content})
+		values(ttr_seq.nextval,#{ttr_no},#{ttr_id},#{ttr_cat},#{ttr_title},#{ttr_date},#{ttr_sdate},#{ttr_edate},#{ttr_place},#{ttr_time},#{ttr_alert},#{ttr_content})
 	</update>
 	
-	<select id="selectBoartdByNo" resultType="Board">
+	<select id="selectBoartdByNo" resultType="board">
 		select ttr_no,com_id,ttr_cat,ttr_title,ttr_date,ttr_sdate,ttr_edate,ttr_place,ttr_time,ttr_alert,ttr_content
 		from theater
-		where ttr_no=#{no}
+		where ttr_no=#{ttr_no}
 	</select>
 	
 	<update id="updateBoard">
-		update theater set ttr_title=#{title},ttr_date=sysdate,ttr_sdate=#{sdate},ttr_edate=#{edate},ttr_place=#{place},ttr_time=#{time},ttr_alert=#{alert},ttr_content=#{content}
-		where ttr_no=#{no}
+		update theater set ttr_title=#{ttr_title},ttr_date=sysdate,ttr_sdate=#{ttr_sdate},ttr_edate=#{ttr_edate},ttr_place=#{ttr_place},ttr_time=#{ttr_time},ttr_alert=#{ttr_alert},ttr_content=#{ttr_content}
+		where ttr_no=#{ttr_no}
 	</update>
 	
 	<update id="deleteBoard">
-		delete from theater where ttr_no=#{no}
+		delete from theater where ttr_no=#{ttr_no}
 	</update>
 	
-	<select id="selectBoardList" resultType="Board">
+	<select id="selectBoardList" resultType="board">
 		select ttr_no,com_id,ttr_cat,ttr_title,ttr_date,ttr_sdate,ttr_edate,ttr_place,ttr_time,ttr_alert,ttr_content
 		from theater
 		order by ttr_no desc
 	</select>
+	
+	<select id="selectBoardListByCat" resultType="board">
+		select *
+		from theater
+		where ttr_cat=#{ttr_cat}
+		order by ttr_no desc
+	</select>
+	
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">
+				and ttr_title like '%'||#{keyword}||'%'
+			</if>
+			<if test="searchType == 'c'.toString()">
+				and ttr_content like '%'||#{keyword}||'%'
+			</if>
+			<if test="searchType == 'p'.toString()">
+				and ttr_place like '%'||#{keyword}||'%'
+			</if>
+		</if>
+	</sql>
+	
+	<select id="selectSearchBoardList" resultType="board">
+		select *
+		from board
+		<include refid="search"></include>
+		order by ttr_no desc
+	</select>
+	
+	<select id="selectmaxttr_no" resultType="int">
+		select max(ttr_no) from theater
+	</select>
+	
+	<update id="insertThumb">
+		insert into thumb(ttr_no,thumb_name,thumb_path)
+		values(#{ttr_no},#{thumb_name},#{thumb_path})
+	</update>
+	
+	<update id="deleteThumb">
+		delete from thumb
+		where ttr_no=#{ttr_no}
+	</update>
+	
+	<select id="selectThumb">
+		select * from thumb
+		where ttr_no=#{ttr_no}
+	</select>
+	
+	<update id="insertseatmap">
+		insert into seatmap(ttr_no,seatmap_name,seatmap_path)
+		value(#{ttr_no},#{seatmap_name},#{seatmap_path})
+	</update>
+	
+	<update id="deleteseatmap">
+		delete from seatmap
+		where ttr_no=#{ttr_no}
+	</update>
+	
+	<select id="selectseatmap">
+		select * from seatmap
+		where ttr_no=#{ttr_no}
+	</select>
+	
+	<update id="insertfile">
+		insert into file_tbl(file_id,file_name,file_path,ttr_no)
+		value(file_seq.nextval,#{file_name},#{file_path},#{ttr_no})
+	</update>
+	
+	<update id="deletefile">
+		delete from file_tbl
+		where ttr_no=#{ttr_no}
+	</update>
+	
+	<select id="selectfile">
+		select * from file_tbl
+		where ttr_no=#{ttr_no}
+		order by ttr_no asc
+	</select>
+	
 </mapper>
