@@ -3,8 +3,8 @@
 
 <mapper namespace="BoardMapper">
 	<update id="insertBoard">
-		insert into theater (ttr_no,com_id,ttr_cat,ttr_title,ttr_date,ttr_sdate,ttr_edate,ttr_place,ttr_time,ttr_alert,ttr_content)
-		values(ttr_seq.nextval,#{ttr_no},#{ttr_id},#{ttr_cat},#{ttr_title},#{ttr_date},#{ttr_sdate},#{ttr_edate},#{ttr_place},#{ttr_time},#{ttr_alert},#{ttr_content})
+		insert into theater (ttr_no,com_id,ttr_cat,ttr_title,ttr_sdate,ttr_edate,ttr_place,ttr_time,ttr_alert,ttr_content)
+		values(ttr_seq.nextval,#{com_id},#{ttr_cat},#{ttr_title},#{ttr_sdate},#{ttr_edate},#{ttr_place},#{ttr_time},#{ttr_alert},#{ttr_content})
 	</update>
 	
 	<select id="selectBoartdByNo" resultType="board">
@@ -61,8 +61,8 @@
 	</select>
 	
 	<update id="insertThumb">
-		insert into thumb(ttr_no,thumb_name,thumb_path)
-		values(#{ttr_no},#{thumb_name},#{thumb_path})
+		insert into thumb(ttr_no,thumb_name)
+		values(#{ttr_no,jdbcType=INTEGER},#{thumb_name,jdbcType=VARCHAR})
 	</update>
 	
 	<update id="deleteThumb">
@@ -76,8 +76,8 @@
 	</select>
 	
 	<update id="insertseatmap">
-		insert into seatmap(ttr_no,seatmap_name,seatmap_path)
-		value(#{ttr_no},#{seatmap_name},#{seatmap_path})
+		insert into seatmap(ttr_no,seatmap_name)
+		values(#{ttr_no},#{seatmap_name})
 	</update>
 	
 	<update id="deleteseatmap">
@@ -91,8 +91,8 @@
 	</select>
 	
 	<update id="insertfile">
-		insert into file_tbl(file_id,file_name,file_path,ttr_no)
-		value(file_seq.nextval,#{file_name},#{file_path},#{ttr_no})
+		insert into file_tbl(file_id,file_name,ttr_no)
+		values(file_seq.nextval,#{file_name},#{ttr_no})
 	</update>
 	
 	<update id="deletefile">

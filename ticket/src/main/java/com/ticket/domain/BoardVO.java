@@ -1,5 +1,6 @@
 package com.ticket.domain;
 
+import java.util.Arrays;
 import java.util.Date;
 
 public class BoardVO {
@@ -14,6 +15,9 @@ public class BoardVO {
 	private String ttr_time;
 	private String ttr_alert;
 	private String ttr_content;
+	private String thumb_name;
+	private String seatmap_name;
+	private String[] files;
 	public int getTtr_no() {
 		return ttr_no;
 	}
@@ -80,10 +84,29 @@ public class BoardVO {
 	public void setTtr_content(String ttr_content) {
 		this.ttr_content = ttr_content;
 	}
+	public String getThumb_name() {
+		return thumb_name;
+	}
+	public void setThumb_name(String thumb_name) {
+		this.thumb_name = thumb_name;
+	}
+	public String getSeatmap_name() {
+		return seatmap_name;
+	}
+	public void setSeatmap_name(String seatmap_name) {
+		this.seatmap_name = seatmap_name;
+	}
+	public String[] getFiles() {
+		return files;
+	}
+	public void setFiles(String[] files) {
+		this.files = files;
+	}
 	public BoardVO(){};
 	public BoardVO(int ttr_no, String com_id, String ttr_cat, String ttr_title,
 			Date ttr_date, Date ttr_sdate, Date ttr_edate, String ttr_place,
-			String ttr_time, String ttr_alert, String ttr_content) {
+			String ttr_time, String ttr_alert, String ttr_content,
+			String thumb_name, String seatmap_name, String[] files) {
 		super();
 		this.ttr_no = ttr_no;
 		this.com_id = com_id;
@@ -96,6 +119,9 @@ public class BoardVO {
 		this.ttr_time = ttr_time;
 		this.ttr_alert = ttr_alert;
 		this.ttr_content = ttr_content;
+		this.thumb_name = thumb_name;
+		this.seatmap_name = seatmap_name;
+		this.files = files;
 	}
 	@Override
 	public String toString() {
@@ -104,7 +130,9 @@ public class BoardVO {
 				+ ", ttr_date=" + ttr_date + ", ttr_sdate=" + ttr_sdate
 				+ ", ttr_edate=" + ttr_edate + ", ttr_place=" + ttr_place
 				+ ", ttr_time=" + ttr_time + ", ttr_alert=" + ttr_alert
-				+ ", ttr_content=" + ttr_content + "]";
+				+ ", ttr_content=" + ttr_content + ", thumb_name=" + thumb_name
+				+ ", seatmap_name=" + seatmap_name + ", files="
+				+ Arrays.toString(files) + "]";
 	}
 	
 }

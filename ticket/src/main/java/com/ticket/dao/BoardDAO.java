@@ -21,18 +21,15 @@ public interface BoardDAO {
 	//썸네일추가
 	void insertThumb(String thumb_name,int ttr_no) throws SQLException;
 	void deleteThumb(int ttr_no) throws SQLException;
-	void replaceThumb(String thumb_name,int ttr_no) throws SQLException;
 	List<String> selectThumb(int ttr_no) throws SQLException;
 	
 	//구조도추가
-	void insertseatmap(String thumb_name,int ttr_no) throws SQLException;
+	void insertseatmap(String seatmap_name,int ttr_no) throws SQLException;
 	void deleteseatmap(int ttr_no) throws SQLException;
-	void replaceseatmap(String thumb_name,int ttr_no) throws SQLException;
 	List<String> selectseatmap(int ttr_no) throws SQLException;
 	
 	//성명파일추가
-	void insertfile(String thumb_name,int ttr_no) throws SQLException;
+	void insertfile(String file_name,int ttr_no) throws SQLException;
 	void deletefile(int ttr_no) throws SQLException;
-	void replacefile(String thumb_name,int ttr_no) throws SQLException;
 	List<String> selectfile(int ttr_no) throws SQLException;
 }

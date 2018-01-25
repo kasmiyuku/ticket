@@ -1,5 +1,6 @@
 package com.ticket.controller;
 
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -35,13 +36,18 @@ public class BoardController {
 		return url;
 	}
 	
-	@RequestMapping(value="/etc/writer",method=RequestMethod.GET)
+	@RequestMapping(value="/write",method=RequestMethod.GET)
 	public void etcwriteForm() throws Exception{}
 	
-	@RequestMapping(value="/etc/writer",method=RequestMethod.POST)
-	public String etcwriteSubmit(BoardVO board) throws Exception{
-		String url="redirect:board/etc";
-		
+	@RequestMapping(value="/write",method=RequestMethod.POST)
+	public String etcwriteSubmit(BoardVO board,Model model) throws Exception{
+		String url="redirect:/board/etc";
+		try{
+			bs.insertBoard(board);
+			model.addAttribute(board);
+		}catch(SQLException e){
+			throw e;
+		}
 		return url;
 	}
 }

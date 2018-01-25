@@ -22,19 +22,49 @@ public class BoardServiceImpl implements BoardService {
 	@Transactional(propagation=Propagation.REQUIRED,rollbackFor={Exception.class})
 	@Override
 	public void insertBoard(BoardVO board) throws SQLException {
+		System.out.println(board);
 		boardDAO.insertBoard(board);
+
+		String[]files = board.getFiles();
+		
+		int ttr_no=boardDAO.selectmaxttr_no();
+		String thumb=board.getThumb_name();
+		String seatmap=board.getThumb_name();
+		boardDAO.insertThumb(thumb, ttr_no);
+		boardDAO.insertseatmap(seatmap, ttr_no);
+		if(files==null) return;
+		for(String file_name:files){
+			boardDAO.insertfile(file_name,ttr_no);
+		}
 	}
 	
 	@Transactional(propagation=Propagation.REQUIRED,rollbackFor={Exception.class})
 	@Override
 	public void updateBoard(BoardVO board) throws SQLException {
 		boardDAO.updateBoard(board);
+		
+		int ttr_no=board.getTtr_no();
+		boardDAO.deletefile(ttr_no);
+		boardDAO.deleteThumb(ttr_no);
+		boardDAO.deleteseatmap(ttr_no);
+		
+		String[]files = board.getFiles();
+		
+		boardDAO.insertThumb(board.getThumb_name(), ttr_no);
+		boardDAO.insertseatmap(board.getThumb_name(), ttr_no);
+		if(files==null) return;
+		for(String file_name:files){
+			boardDAO.insertfile(file_name,ttr_no);
+		}
 	}
 	
 	@Transactional(propagation=Propagation.REQUIRED,rollbackFor={Exception.class})
 	@Override
 	public void deleteBoard(int ttr_no) throws SQLException {
 		boardDAO.deleteBoard(ttr_no);
+		boardDAO.deletefile(ttr_no);
+		boardDAO.deleteThumb(ttr_no);
+		boardDAO.deleteseatmap(ttr_no);
 	}
 	
 	@Transactional(isolation=Isolation.READ_COMMITTED,readOnly=true)

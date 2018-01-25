@@ -64,83 +64,65 @@ public class BoardDAOImpl implements BoardDAO {
 
 	@Override
 	public int selectmaxttr_no() throws SQLException {
-		return (Integer)sqlSession.selectOne(NAMESPACE+".selectMaxttr_no",null);
+		return (Integer)sqlSession.selectOne(NAMESPACE+".selectmaxttr_no",null);
 	}
 
 	@Override
 	public void insertThumb(String thumb_name, int ttr_no) throws SQLException {
 		Map<String,Object> paramMap=new HashMap<String,Object>();
-		paramMap.put("thumb_name",thumb_name);
 		paramMap.put("ttr_no",ttr_no);
+		paramMap.put("thumb_name",thumb_name);
 		sqlSession.update(NAMESPACE+".insertThumb",paramMap);
 	}
 
 	@Override
 	public void deleteThumb(int ttr_no) throws SQLException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void replaceThumb(String thumb_name, int ttr_no) throws SQLException {
-		// TODO Auto-generated method stub
-		
+		sqlSession.update(NAMESPACE+".deleteThumb",ttr_no);
 	}
 
 	@Override
 	public List<String> selectThumb(int ttr_no) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		List<String> thumb=sqlSession.selectList(NAMESPACE+".selectThumb"+ttr_no);
+		return thumb;
 	}
 
 	@Override
-	public void insertseatmap(String thumb_name, int ttr_no)
+	public void insertseatmap(String seatmap_name, int ttr_no)
 			throws SQLException {
-		// TODO Auto-generated method stub
-		
+		Map<String,Object> paramMap=new HashMap<String,Object>();
+		paramMap.put("ttr_no",ttr_no);
+		paramMap.put("seatmap_name",seatmap_name);
+		sqlSession.update(NAMESPACE+".insertseatmap",paramMap);
 	}
 
 	@Override
 	public void deleteseatmap(int ttr_no) throws SQLException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void replaceseatmap(String thumb_name, int ttr_no)
-			throws SQLException {
-		// TODO Auto-generated method stub
-		
+		sqlSession.update(NAMESPACE+".deleteseatmap",ttr_no);
 	}
 
 	@Override
 	public List<String> selectseatmap(int ttr_no) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		List<String> seatmap=sqlSession.selectList(NAMESPACE+".selectseatmap"+ttr_no);
+		return seatmap;
 	}
 
 	@Override
-	public void insertfile(String thumb_name, int ttr_no) throws SQLException {
-		// TODO Auto-generated method stub
-		
+	public void insertfile(String file_name, int ttr_no) throws SQLException {
+		Map<String,Object> paramMap=new HashMap<String,Object>();
+		paramMap.put("file_name",file_name);
+		paramMap.put("ttr_no",ttr_no);
+		sqlSession.update(NAMESPACE+".insertfile",paramMap);
 	}
 
 	@Override
 	public void deletefile(int ttr_no) throws SQLException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void replacefile(String thumb_name, int ttr_no) throws SQLException {
-		// TODO Auto-generated method stub
-		
+		sqlSession.update(NAMESPACE+".deletefile",ttr_no);
 	}
 
 	@Override
 	public List<String> selectfile(int ttr_no) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		List<String> file=sqlSession.selectList(NAMESPACE+".selectfile"+ttr_no);
+		return file;
 	}
 
 }

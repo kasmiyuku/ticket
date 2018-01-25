@@ -1,7 +1,7 @@
-$(".thumbDrop").on("dragenter dragover", function(event) {
+$(".thumb").on("dragenter dragover", function(event) {
 	event.preventDefault();
 });
-$(".thumbDrop").on(
+$(".thumb").on(
 		"drop",
 		function(event) {
 			event.preventDefault();
@@ -13,7 +13,7 @@ $(".thumbDrop").on(
 			formData.append("file", file);
 
 			$.ajax({
-				url : '/ticket/upload',
+				url : '/upload',
 				type : 'post',
 				data : formData,
 				contentType : false,
@@ -22,21 +22,21 @@ $(".thumbDrop").on(
 
 					var str = "";
 					if (checkImageType(data)) {
-						str = "<div><img src='displayFile?fileName=" + data
+						str = "<div><img src='/displayFile?fileName=" + data
 								+ "'/><small data-src='" + data
-								+ "'><input type='hidden' name='thumb' value="+data+"<button>X</button></small></div>"
+								+ "'><input type='hidden' name='thumb_name' value='"+data+"'><button>X</button></small></div>"
 					}
 
-					$('.thumbList').append(str);
+					$(".thumb").append(str);
 				}
 
 			});
 
 		});
-$(".seatmapDrop").on("dragenter dragover", function(event) {
+$(".seatmap").on("dragenter dragover", function(event) {
 	event.preventDefault();
 });
-$(".seatmapDrop").on(
+$(".seatmap").on(
 		"drop",
 		function(event) {
 			event.preventDefault();
@@ -48,7 +48,7 @@ $(".seatmapDrop").on(
 			formData.append("file", file);
 
 			$.ajax({
-				url : '/ticket/upload',
+				url : '/upload',
 				type : 'post',
 				data : formData,
 				contentType : false,
@@ -57,21 +57,22 @@ $(".seatmapDrop").on(
 
 					var str = "";
 					if (checkImageType(data)) {
-						str = "<div><img src='displayFile?fileName=" + data
+						
+						str = "<div><img src='/displayFile?fileName=" + data
 								+ "'/><small data-src='" + data
-								+ "'><button>X</button></small></div>"
+								+ "'><input type='hidden' name='seatmap_name' value='"+data+"'><button>X</button></small></div>"
 					}
 
-					$('.uploadedList').append(str);
+					$(".seatmap").append(str);
 				}
 
 			});
 
 		});
-$(".fileDrop").on("dragenter dragover", function(event) {
+$(".file").on("dragenter dragover", function(event) {
 	event.preventDefault();
 });
-$(".fileDrop").on(
+$(".file").on(
 		"drop",
 		function(event) {
 			event.preventDefault();
@@ -83,7 +84,7 @@ $(".fileDrop").on(
 			formData.append("file", file);
 
 			$.ajax({
-				url : '/ticket/upload',
+				url : '/upload',
 				type : 'post',
 				data : formData,
 				contentType : false,
@@ -92,12 +93,12 @@ $(".fileDrop").on(
 
 					var str = "";
 					if (checkImageType(data)) {
-						str = "<div><img src='displayFile?fileName=" + data
+						str = "<div style='display:inline;'><img class='file_submit' src='/displayFile?fileName=" + data
 								+ "'/><small data-src='" + data
 								+ "'><button>X</button></small></div>"
 					}
 
-					$('.uploadedList').append(str);
+					$(".file").append(str);
 				}
 
 			});
@@ -124,11 +125,11 @@ function getImageLink(fileName) {
 
 	return front + end;
 }
-$('.uploadedList').on('click', 'small ', function() {
+$('.file .seatmap .thumb').on('click', 'small ', function() {
 	var that = $(this);
 
 	$.ajax({
-		url : "deleteFile",
+		url : "/deleteFile",
 		type : "post",
 		dataType : "text",
 		data : {
@@ -141,4 +142,18 @@ $('.uploadedList').on('click', 'small ', function() {
 		}
 	});
 
+});
+
+$('#write').submit(function(event){
+	event.preventDefault();
+	
+	var that=$(this);
+	var str="";
+	$('.file_submit').each(function(index){
+		str+="<input type='hidden' name='files'"
+		+"value='"+$(this).attr('src')+"'>";
+	});
+	
+	that.append(str);
+	that.get(0).submit();
 });
