@@ -22,8 +22,8 @@
 			<c:forEach items="${list}" var="boardVO">
 
 				<tr>
-					<td>${boardVO.ttr_no}</td>
-					<td>${boardVO.ttr_title }</td>
+					<td><img src="/displayFile?fileName=${boardVO.thumb_name}"></td>
+					<td><a href="/board/etc/etcdetail?ttr_no=${boardVO.ttr_no}">${boardVO.ttr_title }</a></td>
 					<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
 							value="${boardVO.ttr_date}" /></td>
 				</tr>

@@ -3,5 +3,7 @@
 <configuration>
 	<typeAliases>
 		<typeAlias alias="board" type="com.ticket.domain.BoardVO"/>
+		<typeAlias alias="str" type="java.lang.String" />
+		<typeAlias alias="int" type="java.lang.Integer" />
 	</typeAliases>
 </configuration>

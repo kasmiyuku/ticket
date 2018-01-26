@@ -14,4 +14,5 @@ public interface BoardService {
 	BoardVO readBoardByNo(int ttr_no) throws SQLException;
 	List<BoardVO> readBoardListByCat(String ttr_cat) throws SQLException;
 	List<BoardVO> readSearchBoardList(SearchCriteria cri) throws SQLException;
+	List<String> getFiles(int ttr_no) throws SQLException;
 }

@@ -7,8 +7,8 @@
 		values(ttr_seq.nextval,#{com_id},#{ttr_cat},#{ttr_title},#{ttr_sdate},#{ttr_edate},#{ttr_place},#{ttr_time},#{ttr_alert},#{ttr_content})
 	</update>
 	
-	<select id="selectBoartdByNo" resultType="board">
-		select ttr_no,com_id,ttr_cat,ttr_title,ttr_date,ttr_sdate,ttr_edate,ttr_place,ttr_time,ttr_alert,ttr_content
+	<select id="selectBoardByNo" resultType="board">
+		select *
 		from theater
 		where ttr_no=#{ttr_no}
 	</select>
@@ -70,8 +70,8 @@
 		where ttr_no=#{ttr_no}
 	</update>
 	
-	<select id="selectThumb">
-		select * from thumb
+	<select id="selectThumb" resultType="str">
+		select thumb_name from thumb
 		where ttr_no=#{ttr_no}
 	</select>
 	
@@ -85,8 +85,8 @@
 		where ttr_no=#{ttr_no}
 	</update>
 	
-	<select id="selectseatmap">
-		select * from seatmap
+	<select id="selectseatmap" resultType="str">
+		select seatmap_name from seatmap
 		where ttr_no=#{ttr_no}
 	</select>
 	
@@ -100,10 +100,10 @@
 		where ttr_no=#{ttr_no}
 	</update>
 	
-	<select id="selectfile">
-		select * from file_tbl
+	<select id="selectfile" resultType="str">
+		select file_name from file_tbl
 		where ttr_no=#{ttr_no}
-		order by ttr_no asc
+		order by file_id
 	</select>
 	
 </mapper>

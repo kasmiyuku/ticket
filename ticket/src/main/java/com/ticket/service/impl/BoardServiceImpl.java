@@ -71,12 +71,20 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<BoardVO> readBoardList() throws SQLException {
 		List<BoardVO> boardList=boardDAO.selectBoardList();
+		for(int i=0;i<boardList.size();i++){
+			BoardVO bef=boardList.get(i);
+			String thumb=boardDAO.selectThumb(bef.getTtr_no());
+			bef.setThumb_name(thumb);
+			boardList.set(i, bef);
+		};
 		return boardList;
 	}
 
 	@Override
 	public BoardVO readBoardByNo(int ttr_no) throws SQLException {
 		BoardVO board=boardDAO.selectBoatdByNo(ttr_no);
+		board.setThumb_name(boardDAO.selectThumb(ttr_no));
+		board.setSeatmap_name(boardDAO.selectseatmap(ttr_no));
 		return board;
 	}
 	
@@ -84,6 +92,12 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<BoardVO> readBoardListByCat(String ttr_cat) throws SQLException {
 		List<BoardVO> boardList=boardDAO.selectBoardListBycat(ttr_cat);
+		for(int i=0;i<boardList.size();i++){
+			BoardVO bef=boardList.get(i);
+			String thumb=boardDAO.selectThumb(bef.getTtr_no());
+			bef.setThumb_name(thumb);
+			boardList.set(i, bef);
+		};
 		return boardList;
 	}
 
@@ -93,5 +107,10 @@ public class BoardServiceImpl implements BoardService {
 		List<BoardVO> boardList=boardDAO.selectSearchList(cri);
 		return boardList;
 	}
-
+	
+	@Override
+	public List<String> getFiles(int ttr_no) throws SQLException{
+		List<String> files=boardDAO.selectfile(ttr_no);
+		return files;
+	}
 }

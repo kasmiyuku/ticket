@@ -93,8 +93,8 @@ $(".file").on(
 
 					var str = "";
 					if (checkImageType(data)) {
-						str = "<div style='display:inline;'><img class='file_submit' src='/displayFile?fileName=" + data
-								+ "'/><small data-src='" + data
+						str = "<div style='display:inline;'><img src='/displayFile?fileName=" + data
+								+ "'/><small class='file_submit' data-src='" + data
 								+ "'><button>X</button></small></div>"
 					}
 
@@ -151,9 +151,34 @@ $('#write').submit(function(event){
 	var str="";
 	$('.file_submit').each(function(index){
 		str+="<input type='hidden' name='files'"
-		+"value='"+$(this).attr('src')+"'>";
+		+"value='"+$(this).attr('data-src')+"'>";
 	});
 	
 	that.append(str);
 	that.get(0).submit();
 });
+function checkImageType(fileName){
+	var pattern=/jpg|gif|png|jpeg/i;
+	
+	return fileName.match(pattern);
+}
+
+function getOri(fullName){
+	
+	var getLink;
+		
+		var front=fullName.substr(0,12); // /2017/12/15/
+		var end=fullName.substr(14); // s_ 이후
+		getLink="/displayFile?fileName="+front+end;
+	
+	return getLink;
+}
+
+function getThumb(fullName){
+	
+	var imgsrc
+		imgsrc="/displayFile?fileName="+fullName;
+	
+	return imgsrc;
+	
+}

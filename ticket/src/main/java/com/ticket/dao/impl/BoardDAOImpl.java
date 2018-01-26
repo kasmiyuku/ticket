@@ -81,8 +81,8 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
-	public List<String> selectThumb(int ttr_no) throws SQLException {
-		List<String> thumb=sqlSession.selectList(NAMESPACE+".selectThumb"+ttr_no);
+	public String selectThumb(int ttr_no) throws SQLException {
+		String thumb=(String) sqlSession.selectOne(NAMESPACE+".selectThumb",ttr_no);
 		return thumb;
 	}
 
@@ -101,8 +101,8 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
-	public List<String> selectseatmap(int ttr_no) throws SQLException {
-		List<String> seatmap=sqlSession.selectList(NAMESPACE+".selectseatmap"+ttr_no);
+	public String selectseatmap(int ttr_no) throws SQLException {
+		String seatmap=(String)sqlSession.selectOne(NAMESPACE+".selectseatmap",ttr_no);
 		return seatmap;
 	}
 
@@ -121,7 +121,7 @@ public class BoardDAOImpl implements BoardDAO {
 
 	@Override
 	public List<String> selectfile(int ttr_no) throws SQLException {
-		List<String> file=sqlSession.selectList(NAMESPACE+".selectfile"+ttr_no);
+		List<String> file=sqlSession.selectList(NAMESPACE+".selectfile",ttr_no);
 		return file;
 	}
 
