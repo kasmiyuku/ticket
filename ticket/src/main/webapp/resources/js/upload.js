@@ -5,7 +5,9 @@ $(".thumb").on(
 		"drop",
 		function(event) {
 			event.preventDefault();
-
+			if($('.thumb div small').attr('data-src')==null){
+				
+			
 			var files = event.originalEvent.dataTransfer.files;
 			var file = files[0];
 
@@ -24,14 +26,14 @@ $(".thumb").on(
 					if (checkImageType(data)) {
 						str = "<div><img src='/displayFile?fileName=" + data
 								+ "'/><small data-src='" + data
-								+ "'><input type='hidden' name='thumb_name' value='"+data+"'><button>X</button></small></div>"
+								+ "'><input type='hidden' name='thumb_name' value='"+data+"'><button type='button'>X</button></small></div>"
 					}
 
 					$(".thumb").append(str);
 				}
 
 			});
-
+			}
 		});
 $(".seatmap").on("dragenter dragover", function(event) {
 	event.preventDefault();
@@ -40,7 +42,7 @@ $(".seatmap").on(
 		"drop",
 		function(event) {
 			event.preventDefault();
-
+			if($('.seatmap div small').attr('data-src')==null){
 			var files = event.originalEvent.dataTransfer.files;
 			var file = files[0];
 
@@ -60,14 +62,14 @@ $(".seatmap").on(
 						
 						str = "<div><img src='/displayFile?fileName=" + data
 								+ "'/><small data-src='" + data
-								+ "'><input type='hidden' name='seatmap_name' value='"+data+"'><button>X</button></small></div>"
+								+ "'><input type='hidden' name='seatmap_name' value='"+data+"'><button type='button'>X</button></small></div>"
 					}
 
 					$(".seatmap").append(str);
 				}
 
 			});
-
+			}
 		});
 $(".file").on("dragenter dragover", function(event) {
 	event.preventDefault();
@@ -95,7 +97,7 @@ $(".file").on(
 					if (checkImageType(data)) {
 						str = "<div style='display:inline;'><img src='/displayFile?fileName=" + data
 								+ "'/><small class='file_submit' data-src='" + data
-								+ "'><button>X</button></small></div>"
+								+ "'><button type='button'>X</button></small></div>"
 					}
 
 					$(".file").append(str);
@@ -125,7 +127,8 @@ function getImageLink(fileName) {
 
 	return front + end;
 }
-$('.file .seatmap .thumb').on('click', 'small ', function() {
+$('.thumb,.seatmap,.file').on('click', 'small ', function(event) {
+	event.preventDefault();
 	var that = $(this);
 
 	$.ajax({
@@ -182,3 +185,4 @@ function getThumb(fullName){
 	return imgsrc;
 	
 }
+//asdasd

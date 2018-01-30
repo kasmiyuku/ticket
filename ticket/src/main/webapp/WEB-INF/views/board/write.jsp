@@ -44,6 +44,6 @@
 		<input type="submit" value="작성">
 	</form>
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-	<script type="text/javascript" src="/resources/js/upload.js"></script>
+	<script src="/resources/js/upload.js"></script>
 </body>
 </html>
