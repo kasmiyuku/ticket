@@ -31,6 +31,7 @@
 			</c:forEach>
 
 		</table>
+		<a href="/board/write"><button>글 작성</button></a>
 	</div>
 </body>
 </html>
