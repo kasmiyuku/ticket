@@ -38,7 +38,7 @@
 </head>
 <body>
 	<form id="write" method="post">
-		<input type="hidden" name="ttr_cat" value="${boardVO.ttr_cat} }"> 
+		<input type="hidden" name="ttr_cat" value="${boardVO.ttr_cat}"> 
 		<input type="hidden" name="com_id" value="${boardVO.com_id}"> 
 		<label>썸네일</label>
 		<div class="thumb"
@@ -93,20 +93,19 @@
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	<script src="/resources/js/upload.js"></script>
 	<script>
-	var Seatinfo[] seats=null;
-	var seat_grds=${boardVO.seat_grd};
-	var seat_nos=${boardVO.seat_no};
-	var seat_pris=${boardVO.seat_pri};
-	var seat_times=${boardVO.seat_time};
-	
-	for(i in seat_grds){
-		seats[i].setSeat_grd(seat_grds.get(i));
-		seats[i].setSeat_no(seat_nos.get(i));
-		seats[i].setSeat_pri(seat_pris.get(i));
-		seats[i].setSeat_time(seat_times.get(i));
-	}
 	$(document).ready(function(){
-			console.log("asd");
+		var seats=null;
+		var seat_grds="${boardVO.seat_grd}";
+		var seat_nos="${boardVO.seat_no}";
+		var seat_pris="${boardVO.seat_pri}";
+		var seat_times="${boardVO.seat_time}";
+		for(i in seat_grds){
+			seats[i].setSeat_grd(seat_grds.get(i));
+			seats[i].setSeat_no(seat_nos.get(i));
+			seats[i].setSeat_pri(seat_pris.get(i));
+			seats[i].setSeat_time(seat_times.get(i));
+		}
+			console.log("${boardVO}");
 			var ttr_no=${boardVO.ttr_no}
 			var thumb_name="${boardVO.thumb_name}"
 			var thumb="<div class='min'><img src='"+getThumb(thumb_name)+"'><ori data_src='"+getOri(thumb_name)+"'></div>"

@@ -49,7 +49,6 @@ public class Seatinfo {
 	public Seatinfo(){};
 	public Seatinfo(String seat_id, int ttr_no, String seat_grd,
 			String seat_no, String seat_pri, Date seat_time) {
-		super();
 		this.seat_id = seat_id;
 		this.ttr_no = ttr_no;
 		this.seat_grd = seat_grd;

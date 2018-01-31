@@ -30,8 +30,10 @@ public class BoardController {
 	
 	@InitBinder public void initBinder(WebDataBinder binder) 
 	{ 
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true)); 
-		SimpleDateFormat time = new SimpleDateFormat("hh:mm"); binder.registerCustomEditor(Date.class, new CustomDateEditor(time, true));
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); binder.registerCustomEditor(Date.class,"ttr_sdate", new CustomDateEditor(dateFormat, true));
+		binder.registerCustomEditor(Date.class,"ttr_edate", new CustomDateEditor(dateFormat, true));
+		binder.registerCustomEditor(Date.class,"ttr_date", new CustomDateEditor(dateFormat, true));
+		SimpleDateFormat time = new SimpleDateFormat("hh:mm"); binder.registerCustomEditor(Date.class,"seat_time", new CustomDateEditor(time, true));
 	}
 	
 
