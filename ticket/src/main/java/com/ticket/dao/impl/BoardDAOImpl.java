@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.ticket.dao.BoardDAO;
 import com.ticket.domain.BoardVO;
 import com.ticket.domain.SearchCriteria;
+import com.ticket.domain.Seatinfo;
 
 public class BoardDAOImpl implements BoardDAO {
 	
@@ -123,6 +124,49 @@ public class BoardDAOImpl implements BoardDAO {
 	public List<String> selectfile(int ttr_no) throws SQLException {
 		List<String> file=sqlSession.selectList(NAMESPACE+".selectfile",ttr_no);
 		return file;
+	}
+
+	@Override
+	public void insertseat(Seatinfo seat) throws SQLException {
+		sqlSession.update(NAMESPACE+".insertseat",seat);
+	}
+
+	@Override
+	public void deleteseatbyseat_id(String seat_id) throws SQLException {
+		sqlSession.update(NAMESPACE+".deleteseatbyseat_id",seat_id);
+	}
+
+	@Override
+	public void deleteseatbyttr_no(int ttr_no) throws SQLException {
+		sqlSession.update(NAMESPACE+".deleteseatbyttr_no",ttr_no);
+	}
+
+	@Override
+	public void updateseatbyseat_id(Seatinfo seat) throws SQLException {
+		sqlSession.update(NAMESPACE+".updateseatbyseat_id",seat);
+	}
+
+	@Override
+	public void updateseatbyttr_no(Seatinfo seat) throws SQLException {
+		sqlSession.update(NAMESPACE+".updateseattbyttr_no",seat);
+	}
+
+	@Override
+	public List<Seatinfo> selectseatbyttr_no(int ttr_no) throws SQLException {
+		List<Seatinfo> seat=sqlSession.selectList(NAMESPACE+".selectseatbyttr_no",ttr_no);
+		return seat;
+	}
+
+	@Override
+	public Seatinfo selectseatbyseat_id(String seat_id) throws SQLException {
+		Seatinfo seat=(Seatinfo) sqlSession.selectOne(NAMESPACE+".selectseatbyseat_id",seat_id);
+		return seat;
+	}
+
+	@Override
+	public List<Seatinfo> selectseat() throws SQLException {
+		List<Seatinfo> seat=sqlSession.selectList(NAMESPACE+".selectseat",null);
+		return seat;
 	}
 
 }

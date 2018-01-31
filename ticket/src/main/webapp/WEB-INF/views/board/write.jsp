@@ -38,6 +38,7 @@
 		</div> 
 		<div><label>세부내용</label> <input type="text" name="ttr_content">
 		</div> 
+		<div><label>좌석정보</label><button id="addseat" type="button">+</button></div>
 		<label>사진자료</label>
 		<div class="file"
 			style="width: 800px; height: 200px; background-color: blue;"></div>

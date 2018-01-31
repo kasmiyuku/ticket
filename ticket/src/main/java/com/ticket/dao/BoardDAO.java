@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.ticket.domain.BoardVO;
 import com.ticket.domain.SearchCriteria;
+import com.ticket.domain.Seatinfo;
 
 public interface BoardDAO {
 	void insertBoard(BoardVO board) throws SQLException;
@@ -32,4 +33,13 @@ public interface BoardDAO {
 	void insertfile(String file_name,int ttr_no) throws SQLException;
 	void deletefile(int ttr_no) throws SQLException;
 	List<String> selectfile(int ttr_no) throws SQLException;
+	
+	void insertseat(Seatinfo seat) throws SQLException;
+	void deleteseatbyseat_id(String seat_id) throws SQLException;
+	void deleteseatbyttr_no(int ttr_no) throws SQLException;
+	void updateseatbyseat_id(Seatinfo seat) throws SQLException;
+	void updateseatbyttr_no(Seatinfo seat) throws SQLException;
+	List<Seatinfo> selectseatbyttr_no(int ttr_no) throws SQLException;
+	Seatinfo selectseatbyseat_id(String seat_id) throws SQLException;
+	List<Seatinfo> selectseat() throws SQLException;
 }

@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,10 +69,22 @@
 		</div> 
 		<div><label>세부내용</label> <input type="text" name="ttr_content" value="${boardVO.ttr_content}" readonly>
 		</div> 
+		<div><label>좌석정보</label>
+		<c:forEach items="${seats}" var="seatinfo">
+
+				<tr>
+					<td><input type="text" name="seat_grd" value="${seatinfo.seat_grd}" readonly></td>
+					<td><input type="text" name="seat_no" value="${seatinfo.seat_no}" readonly></td>
+					<td><input type="text" name="seat_pri" value="${seatinfo.seat_pri}" readonly></td>
+					<td><fmt:formatDate pattern="HH:mm"
+							value="${seatinfo.seat_time}" /></td>
+				</tr>
+
+			</c:forEach>
+		</div>
 		<label>사진자료</label>
 		<div class="file"
 			style="width: 800px; height: 200px; background-color: blue;"></div>
-		<input type="submit" value="작성">
 	</form>
 	<div class="popup back" style="display:none;"></div>
 <div id="popup_front" class='popup front' style="display:none;" >
@@ -80,6 +93,18 @@
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	<script src="/resources/js/upload.js"></script>
 	<script>
+	var Seatinfo[] seats=null;
+	var seat_grds=${boardVO.seat_grd};
+	var seat_nos=${boardVO.seat_no};
+	var seat_pris=${boardVO.seat_pri};
+	var seat_times=${boardVO.seat_time};
+	
+	for(i in seat_grds){
+		seats[i].setSeat_grd(seat_grds.get(i));
+		seats[i].setSeat_no(seat_nos.get(i));
+		seats[i].setSeat_pri(seat_pris.get(i));
+		seats[i].setSeat_time(seat_times.get(i));
+	}
 	$(document).ready(function(){
 			console.log("asd");
 			var ttr_no=${boardVO.ttr_no}

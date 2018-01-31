@@ -185,4 +185,15 @@ function getThumb(fullName){
 	return imgsrc;
 	
 }
+$('#addseat').on('click',function(event){
+	if($('.seat_info').length<11){
+		
+	
+	var str="<div class='seat_info'><input type='text' name='seat_grd'><input type='text' name='seat_no'><input type='text' name='seat_pri'><input type='time' name='seat_time'><input type='button' class='delseat' value='-'></div>";
+	$(this).parent('div').append(str);
+	}
+})
+$('#addseat').parent().on('click','.seat_info>.delseat',function(){
+	$(this).parent('div').remove();
+})
 //asdasd

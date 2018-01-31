@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ticket.domain.BoardVO;
+import com.ticket.domain.Seatinfo;
 import com.ticket.service.BoardService;
 
 @Controller
@@ -27,7 +28,12 @@ public class BoardController {
 	@Autowired
 	private BoardService bs;
 	
-	@InitBinder public void initBinder(WebDataBinder binder) { SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true)); }
+	@InitBinder public void initBinder(WebDataBinder binder) 
+	{ 
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true)); 
+		SimpleDateFormat time = new SimpleDateFormat("hh:mm"); binder.registerCustomEditor(Date.class, new CustomDateEditor(time, true));
+	}
+	
 
 	
 	@RequestMapping(value = "/etc", method = RequestMethod.GET)

@@ -18,6 +18,10 @@ public class BoardVO {
 	private String thumb_name;
 	private String seatmap_name;
 	private String[] files;
+	private String[] seat_grd;
+	private String[] seat_no;
+	private String[] seat_pri;
+	private Date[] seat_time;
 	public int getTtr_no() {
 		return ttr_no;
 	}
@@ -102,11 +106,37 @@ public class BoardVO {
 	public void setFiles(String[] files) {
 		this.files = files;
 	}
-	public BoardVO(){};
+	public String[] getSeat_grd() {
+		return seat_grd;
+	}
+	public void setSeat_grd(String[] seat_grd) {
+		this.seat_grd = seat_grd;
+	}
+	public String[] getSeat_no() {
+		return seat_no;
+	}
+	public void setSeat_no(String[] seat_no) {
+		this.seat_no = seat_no;
+	}
+	public String[] getSeat_pri() {
+		return seat_pri;
+	}
+	public void setSeat_pri(String[] seat_pri) {
+		this.seat_pri = seat_pri;
+	}
+	public Date[] getSeat_time() {
+		return seat_time;
+	}
+	public void setSeat_time(Date[] seat_time) {
+		this.seat_time = seat_time;
+	}
+	public BoardVO(){}
 	public BoardVO(int ttr_no, String com_id, String ttr_cat, String ttr_title,
 			Date ttr_date, Date ttr_sdate, Date ttr_edate, String ttr_place,
 			String ttr_time, String ttr_alert, String ttr_content,
-			String thumb_name, String seatmap_name, String[] files) {
+			String thumb_name, String seatmap_name, String[] files,
+			String[] seat_grd, String[] seat_no, String[] seat_pri,
+			Date[] seat_time) {
 		super();
 		this.ttr_no = ttr_no;
 		this.com_id = com_id;
@@ -122,6 +152,10 @@ public class BoardVO {
 		this.thumb_name = thumb_name;
 		this.seatmap_name = seatmap_name;
 		this.files = files;
+		this.seat_grd = seat_grd;
+		this.seat_no = seat_no;
+		this.seat_pri = seat_pri;
+		this.seat_time = seat_time;
 	}
 	@Override
 	public String toString() {
@@ -132,7 +166,12 @@ public class BoardVO {
 				+ ", ttr_time=" + ttr_time + ", ttr_alert=" + ttr_alert
 				+ ", ttr_content=" + ttr_content + ", thumb_name=" + thumb_name
 				+ ", seatmap_name=" + seatmap_name + ", files="
-				+ Arrays.toString(files) + "]";
-	}
+				+ Arrays.toString(files) + ", seat_grd="
+				+ Arrays.toString(seat_grd) + ", seat_no="
+				+ Arrays.toString(seat_no) + ", seat_pri="
+				+ Arrays.toString(seat_pri) + ", seat_time="
+				+ Arrays.toString(seat_time) + "]";
+	};
+	
 	
 }
