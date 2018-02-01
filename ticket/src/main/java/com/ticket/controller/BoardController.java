@@ -33,6 +33,7 @@ public class BoardController {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); binder.registerCustomEditor(Date.class,"ttr_sdate", new CustomDateEditor(dateFormat, true));
 		binder.registerCustomEditor(Date.class,"ttr_edate", new CustomDateEditor(dateFormat, true));
 		binder.registerCustomEditor(Date.class,"ttr_date", new CustomDateEditor(dateFormat, true));
+		binder.registerCustomEditor(Date.class,"seat_date", new CustomDateEditor(dateFormat, true));
 		SimpleDateFormat time = new SimpleDateFormat("hh:mm"); binder.registerCustomEditor(Date.class,"seat_time", new CustomDateEditor(time, true));
 	}
 	
@@ -52,6 +53,33 @@ public class BoardController {
 		String url="board/etc/etcdetail";
 		BoardVO board=bs.readBoardByNo(ttr_no);
 		model.addAttribute(board);
+		return url;
+	}
+	
+	@RequestMapping(value="etc/etcupdate",method=RequestMethod.GET)
+	public String etcupdate(@RequestParam("ttr_no")int ttr_no,Model model) throws Exception{
+		String url="board/etc/etcupdate";
+		BoardVO board=bs.readBoardByNo(ttr_no);
+		model.addAttribute(board);
+		return url;
+	}
+	
+	@RequestMapping(value="etc/etcupdate",method=RequestMethod.POST)
+	public String etcupdate(BoardVO board,Model model) throws Exception{
+		String url="redirect:/board/etc";
+		try{
+			bs.updateBoard(board);
+			model.addAttribute(board);
+		}catch(SQLException e){
+			throw e;
+		}
+		return url;
+	}
+	
+	@RequestMapping(value="/etc/delete",method=RequestMethod.GET)
+	public String etcdelete(int ttr_no) throws Exception{
+		String url="redirect:/board/etc";
+		bs.deleteBoard(ttr_no);
 		return url;
 	}
 	

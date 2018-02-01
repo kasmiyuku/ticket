@@ -18,9 +18,11 @@ public class BoardVO {
 	private String thumb_name;
 	private String seatmap_name;
 	private String[] files;
+	private String[] seat_id;
 	private String[] seat_grd;
-	private String[] seat_no;
-	private String[] seat_pri;
+	private int[] seat_no;
+	private int[] seat_pri;
+	private Date[] seat_date;
 	private Date[] seat_time;
 	public int getTtr_no() {
 		return ttr_no;
@@ -112,16 +114,16 @@ public class BoardVO {
 	public void setSeat_grd(String[] seat_grd) {
 		this.seat_grd = seat_grd;
 	}
-	public String[] getSeat_no() {
+	public int[] getSeat_no() {
 		return seat_no;
 	}
-	public void setSeat_no(String[] seat_no) {
+	public void setSeat_no(int[] seat_no) {
 		this.seat_no = seat_no;
 	}
-	public String[] getSeat_pri() {
+	public int[] getSeat_pri() {
 		return seat_pri;
 	}
-	public void setSeat_pri(String[] seat_pri) {
+	public void setSeat_pri(int[] seat_pri) {
 		this.seat_pri = seat_pri;
 	}
 	public Date[] getSeat_time() {
@@ -130,13 +132,26 @@ public class BoardVO {
 	public void setSeat_time(Date[] seat_time) {
 		this.seat_time = seat_time;
 	}
+	
+	public Date[] getSeat_date() {
+		return seat_date;
+	}
+	public void setSeat_date(Date[] seat_date) {
+		this.seat_date = seat_date;
+	}
+	public String[] getSeat_id() {
+		return seat_id;
+	}
+	public void setSeat_id(String[] seat_id) {
+		this.seat_id = seat_id;
+	}
 	public BoardVO(){}
 	public BoardVO(int ttr_no, String com_id, String ttr_cat, String ttr_title,
 			Date ttr_date, Date ttr_sdate, Date ttr_edate, String ttr_place,
 			String ttr_time, String ttr_alert, String ttr_content,
 			String thumb_name, String seatmap_name, String[] files,
-			String[] seat_grd, String[] seat_no, String[] seat_pri,
-			Date[] seat_time) {
+			String[] seat_id, String[] seat_grd, int[] seat_no, int[] seat_pri,
+			Date[] seat_date, Date[] seat_time) {
 		super();
 		this.ttr_no = ttr_no;
 		this.com_id = com_id;
@@ -152,9 +167,11 @@ public class BoardVO {
 		this.thumb_name = thumb_name;
 		this.seatmap_name = seatmap_name;
 		this.files = files;
+		this.seat_id = seat_id;
 		this.seat_grd = seat_grd;
 		this.seat_no = seat_no;
 		this.seat_pri = seat_pri;
+		this.seat_date = seat_date;
 		this.seat_time = seat_time;
 	}
 	@Override
@@ -166,12 +183,13 @@ public class BoardVO {
 				+ ", ttr_time=" + ttr_time + ", ttr_alert=" + ttr_alert
 				+ ", ttr_content=" + ttr_content + ", thumb_name=" + thumb_name
 				+ ", seatmap_name=" + seatmap_name + ", files="
-				+ Arrays.toString(files) + ", seat_grd="
+				+ Arrays.toString(files) + ", seat_id="
+				+ Arrays.toString(seat_id) + ", seat_grd="
 				+ Arrays.toString(seat_grd) + ", seat_no="
 				+ Arrays.toString(seat_no) + ", seat_pri="
-				+ Arrays.toString(seat_pri) + ", seat_time="
+				+ Arrays.toString(seat_pri) + ", seat_date="
+				+ Arrays.toString(seat_date) + ", seat_time="
 				+ Arrays.toString(seat_time) + "]";
-	};
-	
+	}
 	
 }

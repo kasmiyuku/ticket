@@ -28,22 +28,25 @@ public class BoardServiceImpl implements BoardService {
 		System.out.println(board);
 		boardDAO.insertBoard(board);
 		
+		int ttr_no = boardDAO.selectmaxttr_no();
+		
 		String[] files = board.getFiles();
 
 		Seatinfo[] seats=new Seatinfo[10];
 
 		String[] seat_grds = board.getSeat_grd();
-		String[] seat_nos = board.getSeat_no();
-		String[] seat_pris = board.getSeat_pri();
+		int[] seat_nos = board.getSeat_no();
+		int[] seat_pris = board.getSeat_pri();
+		Date[] seat_dates = board.getSeat_date();
 		Date[] seat_times = board.getSeat_time();
-		System.out.println(seat_grds[0]);
+		
 		
 		if(seat_grds!=null){
+			System.out.println(seat_grds[0]);
 		for (int i = 0; i < seat_grds.length; i++) {
-			seats[i]=new Seatinfo("",board.getTtr_no(),seat_grds[i],seat_nos[i],seat_pris[i],seat_times[i]);
+			seats[i]=new Seatinfo("",ttr_no,seat_grds[i],seat_nos[i],seat_pris[i],seat_dates[i],seat_times[i]);
 		}
 		}
-		int ttr_no = boardDAO.selectmaxttr_no();
 		String thumb = board.getThumb_name();
 		String seatmap = board.getThumb_name();
 		boardDAO.insertThumb(thumb, ttr_no);
@@ -53,9 +56,9 @@ public class BoardServiceImpl implements BoardService {
 		for (String file_name : files) {
 			boardDAO.insertfile(file_name, ttr_no);
 		}
-		if (seats != null)
-		for (Seatinfo seat : seats) {
-			boardDAO.insertseat(seat);
+		if (seat_grds != null)
+		for (int i = 0; i < seat_grds.length; i++) {
+			boardDAO.insertseat(seats[i]);
 		}
 
 	}
@@ -69,19 +72,22 @@ public class BoardServiceImpl implements BoardService {
 		boardDAO.deletefile(ttr_no);
 		boardDAO.deleteThumb(ttr_no);
 		boardDAO.deleteseatmap(ttr_no);
-
+		List<Seatinfo> seat_bef=boardDAO.selectseatbyttr_no(ttr_no);
+		
 		String[] files = board.getFiles();
 
 		Seatinfo[] seats =new Seatinfo[10];
-
+		
+		String[] seat_ids=board.getSeat_id();
 		String[] seat_grds = board.getSeat_grd();
-		String[] seat_nos = board.getSeat_no();
-		String[] seat_pris = board.getSeat_pri();
+		int[] seat_nos = board.getSeat_no();
+		int[] seat_pris = board.getSeat_pri();
+		Date[] seat_dates = board.getSeat_date();
 		Date[] seat_times = board.getSeat_time();
 		
 		if(seat_grds!=null){
 		for (int i = 0; i < seat_grds.length; i++) {
-			seats[i]=new Seatinfo("",board.getTtr_no(),seat_grds[i],seat_nos[i],seat_pris[i],seat_times[i]);
+			seats[i]=new Seatinfo(seat_ids[i],ttr_no,seat_grds[i],seat_nos[i],seat_pris[i],seat_dates[i],seat_times[i]);
 		}
 		}
 		
@@ -92,20 +98,29 @@ public class BoardServiceImpl implements BoardService {
 		for (String file_name : files) {
 			boardDAO.insertfile(file_name, ttr_no);
 		}
-		if (seats != null)
-		for (Seatinfo seat : seats) {
-			boardDAO.updateseatbyttr_no(seat);
+		if (seat_grds != null)
+		for (int i = 0; i < seat_grds.length; i++) {
+			if(seats[i].getSeat_id()!=null){
+			boardDAO.updateseatbyttr_no(seats[i]);
+			}else if(seats[i].getSeat_id()==null){
+				boardDAO.insertseat(seats[i]);
+			}
+		}
+		for(Seatinfo seat:seat_bef){
+			if(!seat_ids.toString().contains(seat.getSeat_id())){
+				boardDAO.deleteseatbyseat_id(seat.getSeat_id());
+			}
 		}
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	@Override
 	public void deleteBoard(int ttr_no) throws SQLException {
-		boardDAO.deleteBoard(ttr_no);
 		boardDAO.deletefile(ttr_no);
 		boardDAO.deleteThumb(ttr_no);
 		boardDAO.deleteseatmap(ttr_no);
 		boardDAO.deleteseatbyttr_no(ttr_no);
+		boardDAO.deleteBoard(ttr_no);
 	}
 
 	@Transactional(isolation = Isolation.READ_COMMITTED, readOnly = true)
@@ -128,25 +143,31 @@ public class BoardServiceImpl implements BoardService {
 		
 		List<Seatinfo> seats=boardDAO.selectseatbyttr_no(ttr_no);
 		
+		String[] seat_ids=new String[seats.size()];
 		String[] seat_grds = new String[seats.size()];
-		String[] seat_nos = new String[seats.size()];
-		String[] seat_pris = new String[seats.size()];
+		int[] seat_nos = new int[seats.size()];
+		int[] seat_pris = new int[seats.size()];
+		Date[] seat_dates = new Date[seats.size()];
 		Date[] seat_times = new Date[seats.size()];
 		
 		if(seat_grds!=null){
 		for(int i=0;i<seats.size();i++){
+			seat_ids[i]=seats.get(i).getSeat_id();
 			seat_grds[i]=seats.get(i).getSeat_grd();
 			seat_nos[i]=seats.get(i).getSeat_no();
 			seat_pris[i]=seats.get(i).getSeat_pri();
+			seat_dates[i]=seats.get(i).getSeat_date();
 			seat_times[i]=seats.get(i).getSeat_time();
 		}
 		}
 		
 		board.setThumb_name(boardDAO.selectThumb(ttr_no));
 		board.setSeatmap_name(boardDAO.selectseatmap(ttr_no));
+		board.setSeat_id(seat_ids);
 		board.setSeat_grd(seat_grds);
 		board.setSeat_no(seat_nos);
 		board.setSeat_pri(seat_pris);
+		board.setSeat_date(seat_dates);
 		board.setSeat_time(seat_times);
 		
 		return board;

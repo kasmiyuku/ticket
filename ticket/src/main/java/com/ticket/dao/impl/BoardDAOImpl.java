@@ -29,6 +29,7 @@ public class BoardDAOImpl implements BoardDAO {
 
 	@Override
 	public void updateBoard(BoardVO board) throws SQLException {
+		System.out.println(board);
 		sqlSession.update(NAMESPACE+".updateBoard",board);
 	}
 
@@ -128,6 +129,7 @@ public class BoardDAOImpl implements BoardDAO {
 
 	@Override
 	public void insertseat(Seatinfo seat) throws SQLException {
+		System.out.println(seat);
 		sqlSession.update(NAMESPACE+".insertseat",seat);
 	}
 
@@ -148,7 +150,7 @@ public class BoardDAOImpl implements BoardDAO {
 
 	@Override
 	public void updateseatbyttr_no(Seatinfo seat) throws SQLException {
-		sqlSession.update(NAMESPACE+".updateseattbyttr_no",seat);
+		sqlSession.update(NAMESPACE+".updateseatbyttr_no",seat);
 	}
 
 	@Override

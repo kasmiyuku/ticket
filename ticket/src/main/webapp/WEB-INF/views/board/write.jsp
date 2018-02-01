@@ -8,6 +8,7 @@
 <title></title>
 </head>
 <body>
+<a href="/board/etc"><button>목록</button></a>
 	<form id="write" method="post">
 		<input type="hidden" name="ttr_cat" value="기타"> 
 		<input type="hidden" name="com_id" value="qwe"> 
@@ -38,7 +39,17 @@
 		</div> 
 		<div><label>세부내용</label> <input type="text" name="ttr_content">
 		</div> 
-		<div><label>좌석정보</label><button id="addseat" type="button">+</button></div>
+		<div><label>좌석정보</label><button id="addseat" type="button">+</button>
+			<table id="seat_table">
+				<tr>
+					<td>등급</td>
+					<td>좌석수</td>
+					<td>가격</td>
+					<td>날짜</td>
+					<td>시간</td>
+				</tr>
+			</table>
+		</div>
 		<label>사진자료</label>
 		<div class="file"
 			style="width: 800px; height: 200px; background-color: blue;"></div>

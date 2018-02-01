@@ -122,17 +122,17 @@
 	</select>
 	
 	<update id="insertseat">
-		insert into seat(seat_id,ttr_no,seat_grd,seat_no,seat_pri)
-		values(seat_seq.nextval,#{ttr_no},#{seat_grd},#{seat_no},#{seat_pri})
+		insert into seat(seat_id,ttr_no,seat_grd,seat_no,seat_pri,seat_date,seat_time)
+		values(seat_seq.nextval,#{ttr_no},#{seat_grd},#{seat_no},#{seat_pri},#{seat_date},#{seat_time})
 	</update>
 	
 	<update id="updateseatbyseat_id">
-		update seat set seat_grd=#{seat_grd},seat_no=#{seat_no},seat_pri=#{seat_pri}
+		update seat set seat_grd=#{seat_grd},seat_no=#{seat_no},seat_pri=#{seat_pri},seat_date=#{seat_date},seat_time=#{seat_time}
 		where seat_id=#{seat_id}
 	</update>
 	
 	<update id="updateseatbyttr_no">
-		update seat set seat_grd=#{seat_grd},seat_no=#{seat_no},seat_pri=#{seat_pri}
+		update seat set seat_grd=#{seat_grd},seat_no=#{seat_no},seat_pri=#{seat_pri},seat_date=#{seat_date},seat_time=#{seat_time}
 		where ttr_no=#{ttr_no}
 	</update>
 	

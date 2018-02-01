@@ -189,11 +189,11 @@ $('#addseat').on('click',function(event){
 	if($('.seat_info').length<11){
 		
 	
-	var str="<div class='seat_info'><input type='text' name='seat_grd'><input type='text' name='seat_no'><input type='text' name='seat_pri'><input type='time' name='seat_time'><input type='button' class='delseat' value='-'></div>";
-	$(this).parent('div').append(str);
+	var str="<tr class='seat_info'><input type='hidden' name='seat_id'><td><input type='text' name='seat_grd'></td><td><input type='number' name='seat_no'></td><td><input type='number' name='seat_pri'></td><td><input type='date' name='seat_date'></td><td><input type='time' name='seat_time'></td><td><input type='button' class='delseat' value='-'></tr>";
+	$('#seat_table').append(str);
 	}
 })
-$('#addseat').parent().on('click','.seat_info>.delseat',function(){
-	$(this).parent('div').remove();
+$('#seat_table').on('click','.delseat',function(){
+	$(this).parent('td').parent('tr').remove();
 })
 //asdasd

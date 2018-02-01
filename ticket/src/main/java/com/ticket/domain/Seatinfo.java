@@ -7,8 +7,9 @@ public class Seatinfo {
 	private String seat_id;
 	private int ttr_no;
 	private String seat_grd;
-	private String seat_no;
-	private String seat_pri;
+	private int seat_no;
+	private int seat_pri;
+	private Date seat_date;
 	private Date seat_time;
 	public String getSeat_id() {
 		return seat_id;
@@ -28,16 +29,16 @@ public class Seatinfo {
 	public void setSeat_grd(String seat_grd) {
 		this.seat_grd = seat_grd;
 	}
-	public String getSeat_no() {
+	public int getSeat_no() {
 		return seat_no;
 	}
-	public void setSeat_no(String seat_no) {
+	public void setSeat_no(int seat_no) {
 		this.seat_no = seat_no;
 	}
-	public String getSeat_pri() {
+	public int getSeat_pri() {
 		return seat_pri;
 	}
-	public void setSeat_pri(String seat_pri) {
+	public void setSeat_pri(int seat_pri) {
 		this.seat_pri = seat_pri;
 	}
 	public Date getSeat_time() {
@@ -46,21 +47,30 @@ public class Seatinfo {
 	public void setSeat_time(Date seat_time) {
 		this.seat_time = seat_time;
 	}
-	public Seatinfo(){};
-	public Seatinfo(String seat_id, int ttr_no, String seat_grd,
-			String seat_no, String seat_pri, Date seat_time) {
+	
+	public Date getSeat_date() {
+		return seat_date;
+	}
+	public void setSeat_date(Date seat_date) {
+		this.seat_date = seat_date;
+	}
+	public Seatinfo(){}
+	public Seatinfo(String seat_id, int ttr_no, String seat_grd, int seat_no,
+			int seat_pri, Date seat_date, Date seat_time) {
+		super();
 		this.seat_id = seat_id;
 		this.ttr_no = ttr_no;
 		this.seat_grd = seat_grd;
 		this.seat_no = seat_no;
 		this.seat_pri = seat_pri;
+		this.seat_date = seat_date;
 		this.seat_time = seat_time;
 	}
 	@Override
 	public String toString() {
 		return "Seatinfo [seat_id=" + seat_id + ", ttr_no=" + ttr_no
 				+ ", seat_grd=" + seat_grd + ", seat_no=" + seat_no
-				+ ", seat_pri=" + seat_pri + ", seat_time=" + seat_time + "]";
-	}
-	
+				+ ", seat_pri=" + seat_pri + ", seat_date=" + seat_date
+				+ ", seat_time=" + seat_time + "]";
+	};
 }
