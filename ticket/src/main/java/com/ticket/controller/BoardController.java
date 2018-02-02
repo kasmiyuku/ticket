@@ -3,7 +3,9 @@ package com.ticket.controller;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -18,8 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ticket.domain.BoardVO;
-import com.ticket.domain.Seatinfo;
 import com.ticket.service.BoardService;
+import com.ticket.service.ResService;
 
 @Controller
 @RequestMapping("/board")
@@ -27,6 +29,9 @@ public class BoardController {
 
 	@Autowired
 	private BoardService bs;
+	
+	@Autowired
+	private ResService rs;
 	
 	@InitBinder public void initBinder(WebDataBinder binder) 
 	{ 
@@ -80,6 +85,20 @@ public class BoardController {
 	public String etcdelete(int ttr_no) throws Exception{
 		String url="redirect:/board/etc";
 		bs.deleteBoard(ttr_no);
+		return url;
+	}
+	
+	@RequestMapping(value="/reserve",method=RequestMethod.GET)
+	public String reserve(@RequestParam("ttr_no")int ttr_no,Model model) throws Exception{
+		String url="board/reserve";
+		BoardVO board=bs.readBoardByNo(ttr_no);
+		String[] seat_ids=board.getSeat_id();
+		int[] seat_cnt=new int[seat_ids.length];
+		for(int i=0;i<seat_ids.length;i++){
+			seat_cnt[i]=rs.countresbyseat_id(seat_ids[i]);
+		}
+		model.addAttribute(board);
+		model.addAttribute(seat_cnt);
 		return url;
 	}
 	

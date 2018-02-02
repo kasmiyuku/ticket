@@ -143,4 +143,41 @@
 	<update id="deleteseatbyttr_no">
 		delete seat where ttr_no=#{ttr_no}
 	</update>
+	
+	<select id="selectresbyres_id" resultType="res">
+		select * from reserve where res_id=#{res_id}
+	</select>
+	
+	<select id="selectresbyres_nom" resultType="res">
+		select * from reserve where res_nom=#{res_nom} and seat_id=#{seat_id}
+	</select>
+	
+	<select id="selectresbyseat_id" resultType="res">
+		select * from reserve where seat_id=#{seat_id}
+	</select>
+	
+	<select id="selectresbymem_id" resultType="res">
+		select * from reserve where mem_id=#{mem_id}
+	</select>
+	
+	<select id="selectresbyttr_no" resultType="res">
+		select * from reserve where ttr_no=#{ttr_no}
+	</select>
+	
+	<update id="insertres">
+		insert into reserve(res_id,res_date,res_nom,seat_id,mem_id,ttr_no)
+		values(res_seq.nextval,sysdate,#{res_nom},#{seat_id},#{mem_id},#{ttr_no})
+	</update>
+	
+	<update id="deletresbyres_id">
+		delete from reserve where res_id=#{res_id}
+	</update>
+	
+	<update id="deletresbyres_nom">
+		delete from reserve where res_nom=#{res_nom}
+	</update>
+	
+	<update id="deletresbyttr_no">
+		delete from reserve where ttr_no=#{ttr_no}
+	</update>
 </mapper>

@@ -53,6 +53,14 @@
 			class="com.ticket.service.impl.BoardServiceImpl"
 			p:boardDAO-ref="boardDAO"
 			/>
+	<bean	id="resDAO"
+			class="com.ticket.dao.impl.ResDAOImpl"
+			p:sqlSession-ref="sqlSession"
+			/>
+	<bean  id="resService"
+		   class="com.ticket.service.impl.ResServiceImpl"
+		   p:resDAO-ref="resDAO"
+		   />
 			
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 </beans>

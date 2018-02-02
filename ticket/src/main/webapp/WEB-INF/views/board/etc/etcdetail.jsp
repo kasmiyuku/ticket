@@ -43,6 +43,7 @@
 <a href="/board/etc"><button>목록</button></a>
 <a href="/board/etc/etcupdate?ttr_no=${boardVO.ttr_no }"><button>수정</button></a>
 <a href="/board/etc/delete?ttr_no=${boardVO.ttr_no }"><button>삭제</button></a>
+<a href="/board/reserve?ttr_no=${boardVO.ttr_no }"><button>예약</button></a>
 	<form id="write" method="post">
 		<input type="hidden" name="ttr_cat" value="${boardVO.ttr_cat}">
 		<input type="hidden" name="com_id" value="${boardVO.com_id}">

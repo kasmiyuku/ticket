@@ -6,5 +6,6 @@
 		<typeAlias alias="seatinfo" type="com.ticket.domain.Seatinfo"/>
 		<typeAlias alias="str" type="java.lang.String" />
 		<typeAlias alias="int" type="java.lang.Integer" />
+		<typeAlias alias="res" type="com.ticket.domain.ResVO"/>
 	</typeAliases>
 </configuration>

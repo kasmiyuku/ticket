@@ -29,7 +29,6 @@ public class BoardDAOImpl implements BoardDAO {
 
 	@Override
 	public void updateBoard(BoardVO board) throws SQLException {
-		System.out.println(board);
 		sqlSession.update(NAMESPACE+".updateBoard",board);
 	}
 

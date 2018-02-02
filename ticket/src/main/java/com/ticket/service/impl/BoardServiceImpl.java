@@ -106,8 +106,12 @@ public class BoardServiceImpl implements BoardService {
 				boardDAO.insertseat(seats[i]);
 			}
 		}
+		String ids="";
+		for(String id:seat_ids){
+			ids+=id+",";
+		}
 		for(Seatinfo seat:seat_bef){
-			if(!seat_ids.toString().contains(seat.getSeat_id())){
+			if(!ids.contains(seat.getSeat_id())){
 				boardDAO.deleteseatbyseat_id(seat.getSeat_id());
 			}
 		}
