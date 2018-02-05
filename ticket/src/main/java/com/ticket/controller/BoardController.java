@@ -98,7 +98,7 @@ public class BoardController {
 			seat_cnt[i]=rs.countresbyseat_id(seat_ids[i]);
 		}
 		model.addAttribute(board);
-		model.addAttribute(seat_cnt);
+		model.addAttribute("seat_cnt",seat_cnt);
 		return url;
 	}
 	
